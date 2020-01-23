@@ -1,2 +1,5 @@
+## macOS hidden files ##
 .DS_Store
-node_modules
+
+## npm / node ##
+node_modules/
