@@ -3,3 +3,6 @@
 
 ## npm / node ##
 node_modules/
+
+## webpack bundle ##
+public/bundle.js
