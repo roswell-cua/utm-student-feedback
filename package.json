@@ -19,7 +19,9 @@
   "homepage": "https://github.com/dudeuter/utm-student-feedback#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.8.9",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
