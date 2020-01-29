@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const ReviewSchema = mongoose.Schema({
   content: String,
@@ -20,7 +20,7 @@ const ReviewSchema = mongoose.Schema({
 const Review = mongoose.model('Review', ReviewSchema);
 
 module.exports = {
-  connection: mongoose,
+  mongoose,
   ReviewSchema,
   Review
 };
