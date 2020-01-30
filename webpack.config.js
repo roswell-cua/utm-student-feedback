@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
-    entry: path.resolve(__dirname, 'client', 'app.jsx'),
+    entry: path.resolve(__dirname, 'client', 'index.jsx'),
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js',
@@ -14,6 +14,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.json']
+        extensions: ['.js', '.jsx', '.json']
     }
 };
