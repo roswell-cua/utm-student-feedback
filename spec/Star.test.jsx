@@ -7,7 +7,7 @@ describe('Star Component', () => {
   it('should render a svg', () => {
     const wrapper = shallow(<Star />);
 
-    expect(wrapper.containsMatchingElement(<svg />)).toBe(true);
+    expect(wrapper.exists('svg')).toBe(true);
   });
 
   it('it should fill a default color', () => {
