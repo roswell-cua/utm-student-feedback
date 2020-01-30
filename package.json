@@ -7,6 +7,7 @@
     "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack",
+    "seed-database": "node server/seed.js",
     "start-dev": "npx nodemon server/index.js",
     "react-dev": "npx webpack --watch"
   },
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/dudeuter/utm-student-feedback#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "mongoose": "^5.8.9",
     "morgan": "^1.9.1",
     "react": "^16.12.0",
