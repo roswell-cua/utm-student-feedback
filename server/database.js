@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/reviews', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const ReviewSchema = mongoose.Schema({
@@ -13,8 +14,8 @@ const ReviewSchema = mongoose.Schema({
     created: Date,
     modified: Date,
     user: String,
-    avatar: String
-  }
+    avatar: String,
+  },
 });
 
 const Review = mongoose.model('Review', ReviewSchema);
@@ -22,5 +23,5 @@ const Review = mongoose.model('Review', ReviewSchema);
 module.exports = {
   mongoose,
   ReviewSchema,
-  Review
+  Review,
 };
