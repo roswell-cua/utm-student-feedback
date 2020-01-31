@@ -1,12 +1,12 @@
 /* eslint-env jest */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Avatar from '../client/components/Avatar';
 
 describe('Avatar Component', () => {
-  it('should render an image when given an avatar', () => {
-    const wrapper = shallow(<Avatar avatar="localhost:3000/smiley.png" />);
+  it('should render an image when given an source url', () => {
+    const wrapper = mount(<Avatar src="localhost:3000/smiley.png" username="Sam Deuter" />);
 
     expect(wrapper.containsMatchingElement(<img src="localhost:3000/smiley.png" alt="avatar" />)).toBe(true);
   });
@@ -18,7 +18,7 @@ describe('Avatar Component', () => {
   });
 
   it('should not render initials when given both a name and avatar', () => {
-    const wrapper = shallow(<Avatar avatar="localhost:3000/smiley.png" username="Sam Deuter" />);
+    const wrapper = shallow(<Avatar src="localhost:3000/smiley.png" username="Sam Deuter" />);
 
     expect(wrapper.text()).not.toBe('SD');
   });
