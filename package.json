@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/dudeuter/utm-student-feedback#readme",
   "dependencies": {
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/icons": "^4.5.1",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "mongoose": "^5.8.9",
