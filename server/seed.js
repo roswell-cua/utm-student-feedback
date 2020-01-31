@@ -1,5 +1,6 @@
-const db = require('./database');
+/* eslint-disable no-console */
 const faker = require('faker');
+const db = require('./database');
 
 // some helpful constants to generate data
 const NOW = new Date();
@@ -9,59 +10,59 @@ const previousTo = (date) => new Date(date.valueOf() - Math.floor(YEAR * Math.ra
 const after = (date) => new Date(date.valueOf() + Math.floor(WEEK * Math.random()));
 
 // the name of the author
-const author = faker.name.firstName() + ' ' + faker.name.lastName();
+const author = `${faker.name.firstName()} ${faker.name.lastName()}`;
 const authorAvatar = faker.image.avatar();
 
 // collection to be inserted into the database
-let documents = [];
+const documents = [];
 
-for (var i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i += 1) {
   // review dates will be generated randomly within the last year, one tenth of the reviews will
   // have a modified date. the review has not been modified if it has the same date.
-  let documentCreatedDate = previousTo(NOW);
-  let documentModifiedDate = Math.random() > .90 ? after(documentCreatedDate) : documentCreatedDate;
+  const documentCreatedDate = previousTo(NOW);
+  const documentModifiedDate = Math.random() > 0.90
+    ? after(documentCreatedDate) : documentCreatedDate;
 
-  let document = {
+  const document = {
     content: faker.lorem.paragraph(),
     rating: Math.ceil(Math.random() * 5),
     created: documentCreatedDate,
     modified: documentModifiedDate,
-    user: faker.name.firstName() + ' ' + faker.name.lastName(),
-    avatar: faker.image.avatar()
+    user: `${faker.name.firstName()} ${faker.name.lastName()}`,
+    avatar: faker.image.avatar(),
   };
 
   // not all reviews will have replies from the author
-  if (Math.random() > .75) {
-    let responseCreatedDate = after(documentCreatedDate);
-    let responseModifiedDate = Math.random() > .90 ? after(responseCreatedDate) : responseCreatedDate;
+  if (Math.random() > 0.75) {
+    const responseCreatedDate = after(documentCreatedDate);
+    const responseModifiedDate = Math.random() > 0.90
+      ? after(responseCreatedDate) : responseCreatedDate;
 
     document.response = {
       content: faker.lorem.paragraph(),
       created: responseCreatedDate,
       modified: responseModifiedDate,
       user: author,
-      avatar: authorAvatar
+      avatar: authorAvatar,
     };
   }
 
   documents.push(document);
 }
 
-db.Review.deleteMany({}, (err) => {
-  if (err) {
-    console.error(err);
+db.Review.deleteMany({}, (deleteError) => {
+  if (deleteError) {
+    console.error(deleteError);
   } else {
     console.log('Removed all documents from collection\n\nStarting to seed the database...\n');
 
-    db.Review.insertMany(documents, (err) => {
-      if (err) {
-        console.error(err);
+    db.Review.insertMany(documents, (insertError) => {
+      if (insertError) {
+        console.error(insertError);
       } else {
         console.log('Database seeded, ending connection.');
         db.mongoose.disconnect();
       }
     });
-
   }
 });
-
