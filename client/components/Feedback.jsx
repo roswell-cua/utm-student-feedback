@@ -3,17 +3,26 @@ import styled from 'styled-components';
 
 import PercentageBar from './PercentageBar';
 import StarRating from './StarRating';
+import RatingSelector from './RatingSelector';
 
-const Heading = styled.h1`
-  color: blue;
+const Container = styled.div`
+  font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #29303b;
 `;
 
-const App = () => (
-  <Heading>
-    Hello World!
+const Heading = styled.div`
+  font-weight: 400;
+  font-size: 22px;
+`;
+
+const Feedback = () => (
+  <Container>
+    <Heading>Student feedback</Heading>
     <PercentageBar percent={50} />
     <StarRating rating={3} />
-  </Heading>
+    <RatingSelector percent={68} rating={3} />
+  </Container>
 );
 
-export default App;
+export default Feedback;
