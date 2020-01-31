@@ -1,7 +1,28 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const PercentageBar = () => null;
+const Track = styled.div`
+  height: 20px;
+  background-color: #f2f3f5;
+  border-radius: 3px;
+`;
+const Slider = styled.div`
+  width: ${(props) => props.per}%;
+  background-color: #8a92a3;
+  border-radius: 3px;
+  height: 20px;
+`;
+
+const PercentageBar = ({ percent }) => (
+  <Track>
+    <Slider per={percent} />
+  </Track>
+);
+
+PercentageBar.propTypes = {
+  percent: PropTypes.number.isRequired,
+};
 
 export default PercentageBar;
