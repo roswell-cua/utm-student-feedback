@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Star from './Star';
+
+const Container = styled.div`
+  display: flex;
+`;
 
 const StarRating = ({ rating }) => {
   const stars = [];
@@ -10,7 +15,7 @@ const StarRating = ({ rating }) => {
     stars.push(<Star key={i} highlighted={i <= rating} />);
   }
 
-  return <div>{stars}</div>;
+  return <Container>{stars}</Container>;
 };
 
 StarRating.propTypes = {
