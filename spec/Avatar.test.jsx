@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
+
 import Avatar from '../client/components/Avatar';
 
 describe('Avatar Component', () => {

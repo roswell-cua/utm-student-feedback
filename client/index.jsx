@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
+import Feedback from './components/Feedback';
 
-ReactDOM.render(<App />, document.getElementById('review'));
+ReactDOM.render(<Feedback data={{}} />, document.getElementById('review'));
