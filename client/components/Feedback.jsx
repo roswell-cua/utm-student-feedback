@@ -37,7 +37,7 @@ const RatingSelectorContainer = styled.div`
 
 const SearchTitleContainer = styled.div`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   grid-area: st;
 `;
 
@@ -70,18 +70,55 @@ class Feedback extends React.Component {
   constructor(props) {
     super(props);
 
+    this.setQueryString = this.setQueryString.bind(this);
+    this.setQueryRating = this.setQueryRating.bind(this);
+    this.reviewPredicate = this.reviewPredicate.bind(this);
+
     this.state = {
       rating: 3.7,
-      percentages: [10, 20, 30, 40, 50],
+      percentages: [40, 25, 15, 13, 7],
+      reviews: [review, review, review, review, review],
+      queryString: '',
+      queryRating: null,
     };
   }
 
+  setQueryString(str) {
+    this.setState({ queryString: str });
+  }
+
+  setQueryRating(num) {
+    const { queryRating } = this.state;
+    this.setState({ queryRating: (queryRating === num) ? null : num });
+  }
+
+  reviewPredicate(rev) {
+    const { queryString, queryRating } = this.state;
+    const ratingMatch = (queryRating) ? queryRating === Math.round(rev.rating) : true;
+    return ratingMatch && rev.content.includes(queryString);
+  }
+
   render() {
-    const { rating, percentages } = this.state;
+    const {
+      rating, percentages, queryString, queryRating, reviews,
+    } = this.state;
+
+    const searchTitle = `Reviews ${queryString.length > 0 ? `mentioning ${queryString}` : ''}`;
 
     const ratingSelectors = percentages.map(
-      (per, i) => (<RatingSelector percent={per} rating={5 - i} />),
+      (per, i) => (
+        <RatingSelector
+          percent={per}
+          rating={5 - i}
+          onClick={() => { this.setQueryRating(5 - i); }}
+          focused={(queryRating) ? 5 - i === queryRating : null}
+        />
+      ),
     );
+
+    const filteredReviews = reviews
+      .filter(this.reviewPredicate)
+      .map((r) => <Review review={r} />);
 
     return (
       <StyleProvier>
@@ -89,9 +126,11 @@ class Feedback extends React.Component {
         <Container>
           <CourseRatingContainer><CourseRating rating={rating} /></CourseRatingContainer>
           <RatingSelectorContainer>{ratingSelectors}</RatingSelectorContainer>
-          <SearchTitleContainer>Reviews</SearchTitleContainer>
-          <SearchBarContainer><SearchBar /></SearchBarContainer>
-          <ReviewsContainer><Review review={review} /></ReviewsContainer>
+          <SearchTitleContainer>{searchTitle}</SearchTitleContainer>
+          <SearchBarContainer><SearchBar onSearch={this.setQueryString} /></SearchBarContainer>
+          <ReviewsContainer>
+            {(filteredReviews.length) ? filteredReviews : 'Sorry about that'}
+          </ReviewsContainer>
         </Container>
       </StyleProvier>
     );
