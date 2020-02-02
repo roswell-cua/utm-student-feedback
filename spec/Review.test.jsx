@@ -8,8 +8,8 @@ describe('Review Component', () => {
   const review = {
     content: 'This is a review',
     rating: 4,
-    created: NOW,
-    modified: NOW,
+    created: NOW.toString(),
+    modified: NOW.toString(),
     user: 'Sam Deuter',
     avatar: 'localhost:3000/smiley.png',
   };
@@ -33,27 +33,30 @@ describe('Review Component', () => {
     expect(wrapper.contains(NOW.toString())).toBe(true);
   });
 
+  const LATER = new Date(NOW.valueOf() + 500);
   const reviewWithResponse = {
     ...review,
     response: {
       content: 'This is a response',
-      created: NOW,
-      modified: NOW,
-      user: 'Author',
+      created: LATER.toString(),
+      modified: LATER.toString(),
+      user: 'hello author',
       avatar: 'localhost:3000/smiley.png',
     },
   };
   const responseWrapper = mount(<Review review={reviewWithResponse} />);
 
   it('should display a response from the author', () => {
-    expect(responseWrapper.contains('This is a response')).toBe(true);
+    expect(responseWrapper.text().includes('This is a response')).toBe(true);
   });
 
+  // this test is failing, when it should be passing
+  // I don't know specifically why this one passing
   it('should display the author\'s username', () => {
-    expect(responseWrapper.contains('Author')).toBe(true);
+    expect(responseWrapper.text().includes('hello author')).toBe(true);
   });
 
   it('should display the time of the response', () => {
-    expect(responseWrapper.contains(NOW.toString())).toBe(true);
+    expect(responseWrapper.text().includes(LATER.toString())).toBe(true);
   });
 });

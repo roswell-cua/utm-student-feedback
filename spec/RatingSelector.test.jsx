@@ -7,7 +7,7 @@ import RatingSelector from '../client/components/RatingSelector';
 describe('Rating Selector Component', () => {
   it('it should call a callback when clicked', () => {
     const onClickMock = jest.fn();
-    const wrapper = shallow(<RatingSelector onClick={onClickMock} />);
+    const wrapper = shallow(<RatingSelector percent={1} rating={1} onClick={onClickMock} />);
 
     wrapper.simulate('click');
 

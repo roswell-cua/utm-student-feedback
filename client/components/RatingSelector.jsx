@@ -22,7 +22,7 @@ const RatingSelector = ({ percent, rating, onClick }) => (
     <PercentageBar percent={percent} width={100} />
     <StarRating rating={rating} />
     <Percentage>{`${percent}%`}</Percentage>
-    <Close iconStyle={{ height: 10, width: 10 }} />
+    <Close />
   </Container>
 );
 
