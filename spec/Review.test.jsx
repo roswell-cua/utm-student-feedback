@@ -40,23 +40,23 @@ describe('Review Component', () => {
       content: 'This is a response',
       created: LATER.toString(),
       modified: LATER.toString(),
-      user: 'QWERTYASDFGH',
+      user: 'hello author',
       avatar: 'localhost:3000/smiley.png',
     },
   };
   const responseWrapper = mount(<Review review={reviewWithResponse} />);
 
   it('should display a response from the author', () => {
-    expect(responseWrapper.contains('This is a response')).toBe(true);
+    expect(responseWrapper.text().includes('This is a response')).toBe(true);
   });
 
   // this test is failing, when it should be passing
   // I don't know specifically why this one passing
   it('should display the author\'s username', () => {
-    expect(responseWrapper.contains('QWERTYASDFGH')).toBe(true);
+    expect(responseWrapper.text().includes('hello author')).toBe(true);
   });
 
   it('should display the time of the response', () => {
-    expect(responseWrapper.contains(LATER.toString())).toBe(true);
+    expect(responseWrapper.text().includes(LATER.toString())).toBe(true);
   });
 });
