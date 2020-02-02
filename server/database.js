@@ -20,8 +20,19 @@ const ReviewSchema = mongoose.Schema({
 
 const Review = mongoose.model('Review', ReviewSchema);
 
+const getData = function (callback) {
+  Review.find().exec((err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
 module.exports = {
   mongoose,
   ReviewSchema,
   Review,
+  getData,
 };
