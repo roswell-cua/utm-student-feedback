@@ -5,9 +5,13 @@ import styled from 'styled-components';
 import Avatar from './Avatar';
 import StarRating from './StarRating';
 
+import formatTime from '../formatTime';
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  border-top: 1px solid #dedfe0;
+  padding: 15px 0px 15px 0px;
   @media (max-width: 575px) {
     flex-direction: column;
   }
@@ -15,6 +19,7 @@ const Container = styled.div`
 
 const Profile = styled.div`
   order: 1;
+  width: 100px;
   @media (max-width: 575px) {
     display: none;
   }
@@ -22,6 +27,7 @@ const Profile = styled.div`
 
 const Info = styled.div`
   order: 2;
+  width: 150px;
   @media (max-width: 575px) {
     order: 2;
   }
@@ -29,6 +35,7 @@ const Info = styled.div`
 
 const Content = styled.div`
   order: 3;
+  width: 100%;
   @media (max-width: 575px) {
     order: 1;
   }
@@ -47,7 +54,7 @@ const Response = ({ response }) => {
   if (response) {
     return (
       <ResponseWrapper>
-        <div>{`${response.user} (instructor), ${response.created}`}</div>
+        <div>{`${response.user} (instructor), ${formatTime(response.created)}`}</div>
         <div>{response.content}</div>
       </ResponseWrapper>
     );
@@ -76,7 +83,7 @@ const Review = ({ review }) => (
     </Profile>
     <Info>
       <div>{review.user}</div>
-      <div>{review.created}</div>
+      <div>{formatTime(review.created)}</div>
     </Info>
     <Content>
       <StarRating rating={review.rating} />

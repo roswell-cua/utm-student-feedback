@@ -11,8 +11,9 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+const randPercent = () => Math.ceil(Math.random() * 100);
+
 app.get('/entry', (req, res) => {
-  const randPercent = () => Math.ceil(Math.random() * 100);
   db.getData((err, data) => {
     if (err) {
       res.statusCode = 500;
