@@ -1,6 +1,8 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const path = require('path');
+
+const db = require('./database');
 
 const app = express();
 const PORT = 3000;
@@ -8,6 +10,19 @@ const PORT = 3000;
 app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/data', (req, res) => {
+  db.getData((err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.end();
+    } else {
+      res.statusCode = 200;
+      res.send(JSON.stringify(data));
+      res.end();
+    }
+  });
+});
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
