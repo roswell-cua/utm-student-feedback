@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Photo = styled.img`
   width: 50px;
-  height 50px;
+  height: 50px;
   border-radius: 25px;
   display: block;
 `;
