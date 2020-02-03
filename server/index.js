@@ -11,14 +11,21 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/data', (req, res) => {
+app.get('/entry', (req, res) => {
+  const randPercent = () => Math.ceil(Math.random() * 100);
   db.getData((err, data) => {
     if (err) {
       res.statusCode = 500;
       res.end();
     } else {
       res.statusCode = 200;
-      res.send(JSON.stringify(data));
+      res.send(
+        JSON.stringify({
+          rating: (Math.ceil(Math.random() * 40) + 10) / 10,
+          percentages: [randPercent(), randPercent(), randPercent(), randPercent(), randPercent()],
+          reviews: data,
+        }),
+      );
       res.end();
     }
   });
