@@ -6,7 +6,7 @@ import Review from './Review';
 import SearchBar from './SearchBar';
 import CourseRating from './CourseRating';
 
-const StyleProvier = styled.div`
+const StyleProvider = styled.div`
   font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
   font-weight: 300;
   color: #29303b;
@@ -121,7 +121,7 @@ class Feedback extends React.Component {
       .map((r) => <Review review={r} />);
 
     return (
-      <StyleProvier>
+      <StyleProvider>
         <Heading>Student feedback</Heading>
         <Container>
           <CourseRatingContainer><CourseRating rating={rating} /></CourseRatingContainer>
@@ -132,7 +132,7 @@ class Feedback extends React.Component {
             {(filteredReviews.length) ? filteredReviews : 'Sorry about that'}
           </ReviewsContainer>
         </Container>
-      </StyleProvier>
+      </StyleProvider>
     );
   }
 }
