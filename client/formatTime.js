@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /**
  * now should be the current time that the page is loaded
  */

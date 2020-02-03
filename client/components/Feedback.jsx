@@ -63,8 +63,8 @@ class Feedback extends React.Component {
     this.reviewPredicate = this.reviewPredicate.bind(this);
 
     this.state = {
-      rating: 3.7,
-      percentages: [40, 25, 15, 13, 7],
+      rating: 0,
+      percentages: [],
       reviews: [],
       queryString: '',
       queryRating: null,
