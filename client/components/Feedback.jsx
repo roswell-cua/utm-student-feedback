@@ -6,7 +6,7 @@ import Review from './Review';
 import SearchBar from './SearchBar';
 import CourseRating from './CourseRating';
 
-const StyleProvier = styled.div`
+const StyleProvider = styled.div`
   font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
   font-weight: 300;
   color: #29303b;
@@ -54,18 +54,6 @@ const Heading = styled.div`
   font-size: 22px;
 `;
 
-const NOW = new Date().toString();
-
-const review = {
-  content: `I've tried many angular courses on Udemy so far. This is no doubt the best of them, and almost the best at all. It covers every tiny detail of the framework. Great explanation.....! hats up to the trainer nicely composed. From my side few suggestions, mentioning here 1. create a angular library and use it in another angular app 2. artifact our created library to npm store and add dependency to our another angular app. so that it can be install when we ran 'npm install'
-  was this helpful?`,
-  rating: 4,
-  created: NOW,
-  modified: NOW,
-  user: 'Sam Deuter',
-  avatar: 'https://i.udemycdn.com/user/50x50/60471148_2f11.jpg',
-};
-
 class Feedback extends React.Component {
   constructor(props) {
     super(props);
@@ -75,12 +63,24 @@ class Feedback extends React.Component {
     this.reviewPredicate = this.reviewPredicate.bind(this);
 
     this.state = {
-      rating: 3.7,
-      percentages: [40, 25, 15, 13, 7],
-      reviews: [review, review, review, review, review],
+      rating: 0,
+      percentages: [],
+      reviews: [],
       queryString: '',
       queryRating: null,
     };
+  }
+
+  componentDidMount() {
+    fetch(new URL(`${window.location.origin}/entry`))
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          rating: data.rating,
+          percentages: data.percentages,
+          reviews: data.reviews,
+        });
+      });
   }
 
   setQueryString(str) {
@@ -103,7 +103,7 @@ class Feedback extends React.Component {
       rating, percentages, queryString, queryRating, reviews,
     } = this.state;
 
-    const searchTitle = `Reviews ${queryString.length > 0 ? `mentioning ${queryString}` : ''}`;
+    const searchTitle = `Reviews${queryString.length > 0 ? ` mentioning ${queryString}` : ''}`;
 
     const ratingSelectors = percentages.map(
       (per, i) => (
@@ -121,7 +121,7 @@ class Feedback extends React.Component {
       .map((r) => <Review review={r} />);
 
     return (
-      <StyleProvier>
+      <StyleProvider>
         <Heading>Student feedback</Heading>
         <Container>
           <CourseRatingContainer><CourseRating rating={rating} /></CourseRatingContainer>
@@ -132,7 +132,7 @@ class Feedback extends React.Component {
             {(filteredReviews.length) ? filteredReviews : 'Sorry about that'}
           </ReviewsContainer>
         </Container>
-      </StyleProvier>
+      </StyleProvider>
     );
   }
 }
