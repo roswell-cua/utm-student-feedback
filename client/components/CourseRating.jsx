@@ -14,7 +14,7 @@ const Subtitle = styled.div`
 `;
 
 const CourseRating = ({ rating }) => [
-  <Heading key={1}>{rating}</Heading>,
+  <Heading key={1}>{rating.toFixed(1)}</Heading>,
   <StarRating key={2} rating={Math.round(rating)} />,
   <Subtitle key={3}>Course Rating</Subtitle>,
 ];
